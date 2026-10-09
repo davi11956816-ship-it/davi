@@ -9,32 +9,38 @@
 }
 
 :root {
+    --black: #03070b;
+    --black-2: #071018;
+
     --navy: #071a2f;
     --navy-2: #0d2947;
+
     --blue: #1f5d91;
     --blue-light: #4d9bc5;
 
     --gold: #c9a227;
     --gold-light: #e6c85c;
 
-    --red: #a51d1d;
-    --red-light: #d63a3a;
+    --red: #9f2525;
+    --red-light: #d94b4b;
 
-    --bg: #f4f7fa;
+    --bg: #eef2f5;
     --white: #ffffff;
 
     --text: #405267;
     --dark: #172b3f;
     --muted: #718295;
 
+    --paper: #f8f7f1;
+
     --shadow-sm: 0 6px 20px rgba(7, 26, 47, .08);
     --shadow: 0 15px 40px rgba(7, 26, 47, .13);
     --shadow-lg: 0 25px 65px rgba(7, 26, 47, .20);
 
-    --radius: 20px;
-    --radius-lg: 30px;
+    --radius: 18px;
+    --radius-lg: 28px;
 
-    --transition: .35s cubic-bezier(.2,.8,.2,1);
+    --transition: .35s cubic-bezier(.2, .8, .2, 1);
 }
 
 
@@ -63,14 +69,42 @@ body {
     color: var(--text);
 
     background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(31, 93, 145, .07),
+            transparent 30%
+        ),
         linear-gradient(
             135deg,
             #f7f9fb 0%,
-            #edf3f7 45%,
+            #edf3f7 48%,
             #ffffff 100%
         );
 
     overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .035;
+
+    z-index: 999;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,0,0,.5) 0,
+            rgba(0,0,0,.5) 1px,
+            transparent 1px,
+            transparent 4px
+        );
 }
 
 ::selection {
@@ -88,7 +122,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #e8edf2;
+    background: #dfe5ea;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -107,868 +141,231 @@ body {
 
 
 /* =========================================================
-   ========================================================
-   INTRODUÇÃO — ESTILO SÉRIE CRIMINAL
-   ========================================================
+INTRO — PERÍCIA CRIMINAL | CENA DO CRIME
 ========================================================= */
 
-body.intro-ativa {
-    overflow: hidden;
-}
-
-
-/* ---------------------------------------------------------
-   TELA PRINCIPAL
---------------------------------------------------------- */
-
 #intro {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 99999;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #172b3c 0%,
-            #0b141d 45%,
-            #020609 100%
-        );
-
-    animation:
-        intro-saida 1.2s
-        5.6s
-        forwards;
+background:
+radial-gradient(
+circle at 50% 45%,
+rgba(100, 0, 0, .20),
+transparent 45%
+),
+linear-gradient(
+135deg,
+#080707,
+#100b0d 50%,
+#020304
+);
 }
 
-
-/* ---------------------------------------------------------
-   GRADE DE INVESTIGAÇÃO
---------------------------------------------------------- */
+/* Grade de investigação */
 
 #intro::before {
-    content: "";
+opacity: .16;
 
-    position: absolute;
+background:
+    linear-gradient(
+        90deg,
+        transparent 49.8%,
+        rgba(180, 20, 20, .25) 50%,
+        transparent 50.2%
+    ),
+    linear-gradient(
+        0deg,
+        transparent 49.8%,
+        rgba(180, 20, 20, .18) 50%,
+        transparent 50.2%
+    );
+background-size: 65px 65px;
 
-    inset: 0;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        45px 45px;
-
-    opacity: .35;
 }
 
-
-/* ---------------------------------------------------------
-   VINHETA
---------------------------------------------------------- */
+/* Vinheta escura */
 
 #intro::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle,
-            transparent 30%,
-            rgba(0,0,0,.75) 100%
-        );
-
-    pointer-events: none;
+background:
+radial-gradient(
+ellipse at center,
+transparent 10%,
+rgba(0, 0, 0, .72) 75%,
+#000 100%
+);
 }
 
-
-/* ---------------------------------------------------------
-   LUZ VERMELHA
---------------------------------------------------------- */
+/* Luz vermelha da cena do crime */
 
 .intro-luz {
-    position: absolute;
+background:
+radial-gradient(
+circle,
+rgba(150, 0, 0, .22),
+rgba(100, 0, 0, .07) 40%,
+transparent 70%
+);
 
-    width: 550px;
-    height: 550px;
+animation: luzPericial 3s ease-in-out infinite;
 
-    top: -230px;
-    right: -180px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(180, 25, 25, .45),
-            transparent 65%
-        );
-
-    filter: blur(20px);
-
-    animation:
-        luz-criminal 3s
-        ease-in-out
-        infinite alternate;
 }
 
-
-/* ---------------------------------------------------------
-   CENA
---------------------------------------------------------- */
+/* Dossiê criminal */
 
 .intro-cena {
-    position: relative;
+border: 1px solid rgba(170, 35, 35, .55);
 
-    z-index: 3;
+background:
+    linear-gradient(
+        145deg,
+        rgba(15, 13, 15, .98),
+        rgba(4, 5, 7, .98)
+    );
+box-shadow:
+    0 0 60px rgba(0, 0, 0, .85),
+    0 0 35px rgba(120, 0, 0, .10),
+    inset 0 0 45px rgba(120, 0, 0, .035);
 
-    width: min(1050px, 90%);
-
-    padding: 42px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.012)
-        );
-
-    box-shadow:
-        0 40px 100px rgba(0,0,0,.65),
-        inset 0 0 80px rgba(0,0,0,.35);
-
-    transform:
-        perspective(1000px)
-        rotateX(4deg);
-
-    animation:
-        cena-entrada 1.3s
-        .15s
-        both;
 }
 
+/* Marcas de evidência */
 
-/* ---------------------------------------------------------
-   CABEÇALHO DO ARQUIVO
---------------------------------------------------------- */
-
-.intro-cabecalho {
-    display: flex;
-
-    justify-content: space-between;
-
-    color:
-        rgba(255,255,255,.48);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .65rem;
-
-    letter-spacing: 3px;
-
-    opacity: 0;
-
-    animation:
-        aparecer .7s
-        .6s
-        forwards;
+.intro-cena::before,
+.intro-cena::after {
+border-color: #a52a2a;
 }
 
-
-/* ---------------------------------------------------------
-   LINHA
---------------------------------------------------------- */
-
-.intro-linha {
-    width: 0;
-
-    height: 1px;
-
-    margin-top: 16px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--red),
-            rgba(255,255,255,.12),
-            transparent
-        );
-
-    animation:
-        linha-intro 1s
-        .8s
-        forwards;
-}
-
-
-/* ---------------------------------------------------------
-   CASO
---------------------------------------------------------- */
-
-.caso-identificacao {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-top: 30px;
-
-    opacity: 0;
-
-    animation:
-        aparecer .8s
-        1s
-        forwards;
-}
-
-.caso-label {
-    color:
-        rgba(255,255,255,.45);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .65rem;
-
-    letter-spacing: 3px;
-}
+/* Informações do caso */
 
 .caso-identificacao strong {
-    color: #eeeeee;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:
-        clamp(1.3rem, 3vw, 2rem);
-
-    letter-spacing: 6px;
+color: #d4b65b;
 }
 
 .caso-status {
-    color:
-        var(--red-light);
+color: #ff5555;
 
-    font-family:
-        "Courier New",
-        monospace;
+border-color: rgba(220, 35, 35, .65);
+background: rgba(120, 0, 0, .12);
+animation: alertaCrime 2s infinite;
 
-    font-size: .65rem;
-
-    letter-spacing: 2px;
-
-    text-shadow:
-        0 0 12px rgba(214,58,58,.6);
-
-    animation:
-        status-piscar 1.2s
-        infinite;
 }
 
-
-/* =========================================================
-   EVIDÊNCIAS
-========================================================= */
-
-.evidencias {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 28px;
-
-    margin-top: 45px;
-
-    perspective: 900px;
-}
-
-.evidencia {
-    position: relative;
-
-    width: 190px;
-    height: 135px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.13);
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b2730,
-            #080e13
-        );
-
-    box-shadow:
-        0 18px 35px rgba(0,0,0,.5);
-
-    opacity: 0;
-}
-
-.evidencia::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 7px;
-
-    border:
-        1px dashed
-        rgba(255,255,255,.12);
-}
-
-.evidencia span {
-    position: relative;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 2.4rem;
-
-    font-weight: bold;
-
-    letter-spacing: 4px;
-}
-
-.evidencia small {
-    position: relative;
-
-    margin-top: 5px;
-
-    color:
-        var(--gold);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .55rem;
-
-    letter-spacing: 3px;
-}
-
-
-/* EVIDÊNCIA 1 */
-
-.evidencia-1 {
-    transform:
-        rotate(-6deg)
-        translateY(40px);
-
-    animation:
-        evidencia-1 1s
-        1.4s
-        forwards;
-}
-
-
-/* EVIDÊNCIA 2 */
-
-.evidencia-2 {
-    transform:
-        rotate(3deg)
-        translateY(40px);
-
-    animation:
-        evidencia-2 1s
-        1.7s
-        forwards;
-}
-
-
-/* EVIDÊNCIA 3 */
-
-.evidencia-3 {
-    transform:
-        rotate(-2deg)
-        translateY(40px);
-
-    animation:
-        evidencia-3 1s
-        2s
-        forwards;
-}
-
-
-/* =========================================================
-   TÍTULO DA INTRO
-========================================================= */
-
-.intro-titulo {
-    margin-top: 48px;
-
-    text-align: center;
-
-    opacity: 0;
-
-    animation:
-        titulo-entrada 1.1s
-        2.3s
-        forwards;
-}
-
-.intro-subtitulo {
-    margin-bottom: 10px;
-
-    color:
-        var(--gold);
-
-    font-family:
-        "Segoe UI",
-        sans-serif;
-
-    font-size: .65rem;
-
-    font-weight: 700;
-
-    letter-spacing: 7px;
-}
+/* Título da investigação */
 
 .intro-titulo h1 {
-    color: #ffffff;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(3rem, 7vw, 6rem);
-
-    line-height: 1;
-
-    letter-spacing: -3px;
-
-    text-shadow:
-        0 8px 35px rgba(0,0,0,.6);
+text-shadow:
+0 0 25px rgba(150, 0, 0, .18),
+0 4px 25px rgba(0, 0, 0, .8);
 }
 
 .intro-titulo h1 span {
-    color:
-        var(--gold);
-
-    font-style: italic;
+color: #b52b32;
 }
 
-.intro-titulo p {
-    margin-top: 18px;
+/* Linha vermelha de evidência */
 
-    color:
-        rgba(255,255,255,.45);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .6rem;
-
-    letter-spacing: 5px;
+.intro-linha {
+background:
+linear-gradient(
+90deg,
+transparent,
+#8e2028,
+#c9a227,
+#8e2028,
+transparent
+);
 }
 
+/* Marcadores de evidências */
 
-/* =========================================================
-   DADOS DA INVESTIGAÇÃO
-========================================================= */
+.evidencia {
+border-color: rgba(170, 35, 35, .5);
+
+background:
+    linear-gradient(
+        145deg,
+        rgba(120, 0, 0, .10),
+        rgba(255, 255, 255, .015)
+    );
+box-shadow:
+    0 8px 20px rgba(0, 0, 0, .25);
+
+}
+
+.evidencia span {
+color: #c33a40;
+
+text-shadow:
+    0 0 12px rgba(200, 20, 30, .2);
+
+}
+
+/* Dados da perícia */
 
 .investigacao {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-    margin-top: 42px;
-
-    padding-top: 25px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.08);
-
-    opacity: 0;
-
-    animation:
-        aparecer .8s
-        3.1s
-        forwards;
+border-color: rgba(180, 35, 35, .22);
 }
 
 .investigacao-item {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
+border-color: rgba(255, 255, 255, .07);
 }
 
-.investigacao-item span {
-    color:
-        rgba(255,255,255,.3);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .5rem;
-
-    letter-spacing: 2px;
-}
-
-.investigacao-item strong {
-    color:
-        rgba(255,255,255,.7);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .65rem;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   BARRA DE CARREGAMENTO
-========================================================= */
-
-.intro-carregamento {
-    margin-top: 28px;
-
-    opacity: 0;
-
-    animation:
-        aparecer .7s
-        3.6s
-        forwards;
-}
-
-.intro-carregamento > span {
-    color:
-        rgba(255,255,255,.35);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .55rem;
-
-    letter-spacing: 3px;
-}
+/* Carregamento da investigação */
 
 .barra-carregamento {
-    width: 100%;
-
-    height: 2px;
-
-    margin-top: 8px;
-
-    background:
-        rgba(255,255,255,.08);
+background: rgba(255, 255, 255, .07);
 }
 
 .barra-carregamento div {
-    width: 0;
+background:
+linear-gradient(
+90deg,
+#681116,
+#c52e35,
+#d4b65b
+);
 
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--red),
-            var(--red-light)
-        );
-
-    box-shadow:
-        0 0 12px rgba(214,58,58,.7);
-
-    animation:
-        carregar 1.7s
-        3.8s
-        forwards;
-}
-
-
-/* =========================================================
-   AVISO
-========================================================= */
-
-.intro-aviso {
-    margin-top: 14px;
-
-    color:
-        rgba(255,255,255,.22);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: .5rem;
-
-    letter-spacing: 4px;
-
-    text-align: center;
-
-    opacity: 0;
-
-    animation:
-        aparecer .7s
-        4.1s
-        forwards;
-}
-
-
-/* =========================================================
-   ANIMAÇÕES DA INTRO
-========================================================= */
-
-@keyframes aparecer {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+box-shadow:
+    0 0 12px rgba(190, 25, 35, .4);
 
 }
 
-@keyframes linha-intro {
+/* Animações */
 
-    from {
-        width: 0;
-    }
+@keyframes luzPericial {
+0%, 100% {
+opacity: .45;
+transform: scale(.9);
+}
 
-    to {
-        width: 100%;
-    }
+50% {
+    opacity: 1;
+    transform: scale(1.12);
+}
 
 }
 
-@keyframes cena-entrada {
+@keyframes alertaCrime {
+0%, 100% {
+box-shadow: 0 0 0 rgba(220, 35, 35, 0);
+}
 
-    from {
-        opacity: 0;
-
-        transform:
-            perspective(1000px)
-            rotateX(15deg)
-            translateY(50px)
-            scale(.94);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            perspective(1000px)
-            rotateX(4deg)
-            translateY(0)
-            scale(1);
-    }
+50% {
+    box-shadow: 0 0 12px rgba(220, 35, 35, .15);
+}
 
 }
 
-@keyframes evidencia-1 {
+/* Respeita telas pequenas */
 
-    to {
-        opacity: 1;
-
-        transform:
-            rotate(-6deg)
-            translateY(0);
-    }
-
+@media (max-width: 480px) {
+.intro-cena {
+border-color: rgba(170, 35, 35, .6);
 }
 
-@keyframes evidencia-2 {
-
-    to {
-        opacity: 1;
-
-        transform:
-            rotate(3deg)
-            translateY(0);
-    }
-
+.intro-titulo h1 span {
+    text-shadow: 0 0 18px rgba(180, 20, 30, .2);
 }
 
-@keyframes evidencia-3 {
-
-    to {
-        opacity: 1;
-
-        transform:
-            rotate(-2deg)
-            translateY(0);
-    }
-
 }
-
-@keyframes titulo-entrada {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(30px);
-
-        filter:
-            blur(8px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-        filter:
-            blur(0);
-    }
-
-}
-
-@keyframes carregar {
-
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
-
-}
-
-@keyframes status-piscar {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: .35;
-    }
-
-}
-
-@keyframes luz-criminal {
-
-    from {
-        opacity: .35;
-
-        transform:
-            scale(.85);
-    }
-
-    to {
-        opacity: .8;
-
-        transform:
-            scale(1.15);
-    }
-
-}
-
-@keyframes intro-saida {
-
-    0%,
-    80% {
-        opacity: 1;
-
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-
-        visibility: hidden;
-
-        pointer-events: none;
-    }
-
-}
-
-
-/* =========================================================
-   SITE PRINCIPAL APÓS A INTRO
-========================================================= */
-
-body.intro-ativa header,
-body.intro-ativa main,
-body.intro-ativa footer {
-    opacity: 0;
-
-    animation:
-        site-entrada 1.2s
-        5.2s
-        forwards;
-}
-
-@keyframes site-entrada {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
-
-}
-
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -988,35 +385,24 @@ header,
     background:
         linear-gradient(
             135deg,
-            rgba(7,26,47,.97),
-            rgba(13,41,71,.96)
+            rgba(4,14,25,.98),
+            rgba(9,31,52,.97)
         );
 
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     border-bottom:
-        2px solid
-        rgba(201,162,39,.55);
+        2px solid rgba(201,162,39,.55);
 
     box-shadow:
-        0 12px 40px
-        rgba(7,26,47,.25);
+        0 12px 40px rgba(0,0,0,.35);
 }
-
-
-/* =========================================================
-   PERFIL
-========================================================= */
 
 .perfil {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 22px;
@@ -1026,55 +412,81 @@ header,
     color: white;
 }
 
+.foto-container {
+    position: relative;
+}
+
 .foto-perfil {
     width: 110px;
     height: 110px;
 
-    flex-shrink: 0;
+    display: block;
 
     object-fit: cover;
 
     border-radius: 50%;
 
-    border:
-        4px solid
-        var(--gold);
+    border: 4px solid var(--gold);
 
-    outline:
-        4px solid
-        rgba(255,255,255,.15);
+    outline: 4px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 0 0 8px
-        rgba(201,162,39,.08),
-        0 15px 35px
-        rgba(0,0,0,.35);
+        0 0 0 8px rgba(201,162,39,.07),
+        0 15px 35px rgba(0,0,0,.45);
 
-    transition:
-        var(--transition);
+    transition: var(--transition);
 }
 
 .foto-perfil:hover {
-    transform:
-        scale(1.07);
+    transform: scale(1.07);
 
-    border-color:
-        var(--gold-light);
+    border-color: var(--gold-light);
 
     box-shadow:
-        0 0 0 10px
-        rgba(201,162,39,.12),
-        0 20px 45px
-        rgba(0,0,0,.4);
+        0 0 0 12px rgba(201,162,39,.10),
+        0 20px 45px rgba(0,0,0,.5);
+}
+
+.selo-perfil {
+    position: absolute;
+
+    right: -15px;
+    bottom: 3px;
+
+    padding: 3px 7px;
+
+    color: var(--navy);
+
+    background: var(--gold);
+
+    font-family: monospace;
+
+    font-size: .5rem;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    transform: rotate(-8deg);
 }
 
 .perfil-info {
     text-align: left;
 }
 
-.perfil-info h1 {
-    margin: 0;
+.micro-label {
+    margin-bottom: 5px;
 
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: .6rem;
+
+    letter-spacing: 3px;
+}
+
+.perfil-info h1 {
     color: white;
 
     font-family:
@@ -1082,43 +494,64 @@ header,
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(1.6rem, 3vw, 2.3rem);
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
 
-    font-weight: 700;
+    line-height: 1.2;
 
     letter-spacing: .3px;
 }
 
-.perfil-info h1::after {
-    content: "";
-
-    display: block;
-
-    width: 60px;
-    height: 3px;
-
-    margin-top: 8px;
-
-    background:
-        var(--gold);
-}
-
 .perfil-info p {
-    margin: 8px 0 0;
+    margin: 7px 0 0;
 
-    color:
-        rgba(255,255,255,.75);
+    color: rgba(255,255,255,.65);
 
-    font-size: .9rem;
+    font-size: .82rem;
 
     letter-spacing: 1px;
 }
 
 
 /* =========================================================
-   MENU
+   NAV
 ========================================================= */
+
+nav {
+    position: relative;
+}
+
+.nav-status {
+    position: absolute;
+
+    right: 0;
+    top: -35px;
+
+    color: rgba(255,255,255,.3);
+
+    font-family: monospace;
+
+    font-size: .52rem;
+
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 5px;
+
+    border-radius: 50%;
+
+    background: #54d66d;
+
+    box-shadow:
+        0 0 8px #54d66d;
+
+    animation: piscar 2s infinite;
+}
 
 nav ul {
     display: flex;
@@ -1126,7 +559,7 @@ nav ul {
     justify-content: center;
     align-items: center;
 
-    gap: 7px;
+    gap: 5px;
 
     list-style: none;
 
@@ -1138,55 +571,54 @@ nav a {
 
     display: block;
 
-    padding: 8px 15px;
+    padding: 8px 14px;
 
-    color:
-        rgba(255,255,255,.86);
+    color: rgba(255,255,255,.72);
 
     text-decoration: none;
 
-    font-size: .92rem;
+    font-size: .83rem;
 
     font-weight: 600;
 
-    border-radius: 5px;
+    border-radius: 4px;
 
-    transition:
-        var(--transition);
+    transition: var(--transition);
 }
 
-nav a::before {
-    content: "";
+nav a span {
+    color: var(--gold);
 
-    position: absolute;
-
-    left: 50%;
-    bottom: 2px;
-
-    width: 0;
-    height: 2px;
-
-    background:
-        var(--gold);
-
-    transform:
-        translateX(-50%);
-
-    transition:
-        var(--transition);
+    margin-right: 4px;
 }
 
 nav a:hover {
     color: white;
 
-    background:
-        rgba(255,255,255,.06);
+    background: rgba(255,255,255,.06);
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
 
-nav a:hover::before {
+nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 1px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--gold);
+
+    transform: translateX(-50%);
+
+    transition: var(--transition);
+}
+
+nav a:hover::after {
     width: 60%;
 }
 
@@ -1196,32 +628,67 @@ nav a:hover::before {
 ========================================================= */
 
 section {
+    position: relative;
+
     width: min(1100px, 90%);
 
     margin: 0 auto;
 
     padding: 95px 0;
 
-    animation:
-        fade-up .8s ease both;
+    animation: fadeUp .8s ease both;
 }
 
-@keyframes fade-up {
-
+@keyframes fadeUp {
     from {
         opacity: 0;
-
-        transform:
-            translateY(25px);
+        transform: translateY(25px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
+}
 
+.secao-cabecalho {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+.numero-secao {
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: .75rem;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+.codigo-secao {
+    color: #91a0ad;
+
+    font-family: monospace;
+
+    font-size: .58rem;
+
+    letter-spacing: 3px;
+}
+
+.codigo-secao::before {
+    content: "//";
+
+    margin-right: 7px;
+
+    color: var(--gold);
 }
 
 
@@ -1232,8 +699,7 @@ section {
 h1,
 h2,
 h3 {
-    color:
-        var(--dark);
+    color: var(--dark);
 }
 
 h2 {
@@ -1248,8 +714,7 @@ h2 {
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2rem, 4vw, 2.8rem);
 
     font-weight: 700;
 
@@ -1285,8 +750,7 @@ h3 {
 
     font-size: 1.35rem;
 
-    color:
-        var(--navy-2);
+    color: var(--navy-2);
 
     line-height: 1.4;
 }
@@ -1303,8 +767,7 @@ p {
 #hero {
     position: relative;
 
-    min-height:
-        calc(100vh - 190px);
+    min-height: calc(100vh - 190px);
 
     display: flex;
 
@@ -1326,17 +789,14 @@ p {
 
     position: absolute;
 
-    top: 5%;
+    top: 3%;
     right: 5%;
 
-    font-family:
-        Georgia,
-        serif;
+    color: rgba(201,162,39,.045);
 
-    font-size: 15rem;
+    font-family: Georgia, serif;
 
-    color:
-        rgba(201,162,39,.045);
+    font-size: 17rem;
 
     z-index: -1;
 }
@@ -1346,82 +806,122 @@ p {
 
     position: absolute;
 
-    left: 50%;
-    bottom: 20px;
+    width: 500px;
+    height: 500px;
 
-    width: 180px;
-    height: 1px;
+    border: 1px solid rgba(201,162,39,.06);
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
+    border-radius: 50%;
 
-    transform:
-        translateX(-50%);
+    z-index: -1;
+
+    animation: circuloHero 12s linear infinite;
+}
+
+.hero-arquivo {
+    position: absolute;
+
+    top: 35px;
+
+    left: 0;
+    right: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #8a99a7;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
+}
+
+.hero-arquivo span:last-child {
+    color: #558f62;
+}
+
+.hero-simbolo {
+    margin-bottom: 15px;
+
+    color: var(--gold);
+
+    font-family: Georgia, serif;
+
+    font-size: 3rem;
+
+    opacity: .8;
+
+    animation:
+        flutuar 4s ease-in-out infinite;
+}
+
+.hero-overline {
+    color: var(--gold);
+
+    font-size: .68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
 }
 
 #hero h1 {
     max-width: 950px;
 
-    margin-bottom: 30px;
+    margin: 15px 0 25px;
 
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(3rem, 8vw, 5.8rem);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
 
-    line-height: 1.05;
+    line-height: .95;
 
-    font-weight: 700;
+    letter-spacing: -3px;
 
-    letter-spacing: -2px;
+    color: var(--navy);
 
-    color:
-        var(--navy);
-}
-
-#hero h1::before {
-    content:
-        "DIREITO • JUSTIÇA • PROPÓSITO";
-
-    display: block;
-
-    margin-bottom: 20px;
-
-    font-family:
-        "Segoe UI",
-        sans-serif;
-
-    font-size: .75rem;
-
-    font-weight: 700;
-
-    letter-spacing: 5px;
-
-    color:
-        var(--gold);
+    text-shadow:
+        0 5px 30px rgba(7,26,47,.08);
 }
 
 #hero p {
-    max-width: 900px;
+    max-width: 820px;
 
-    color:
-        var(--text);
+    color: var(--text);
 
-    font-size: 1.05rem;
+    font-size: 1.03rem;
 }
 
+.hero-carimbo {
+    margin: 20px 0;
 
-/* =========================================================
-   BOTÕES
-========================================================= */
+    padding: 8px 16px;
+
+    color: var(--red);
+
+    border: 3px solid var(--red);
+
+    font-family: monospace;
+
+    font-size: .72rem;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    transform: rotate(-5deg);
+
+    opacity: .75;
+
+    animation:
+        carimboEntrada 1s 1s both;
+}
 
 .botao,
 button {
@@ -1434,11 +934,9 @@ button {
 
     padding: 13px 32px;
 
-    border:
-        1px solid
-        var(--gold);
+    border: 1px solid var(--gold);
 
-    border-radius: 5px;
+    border-radius: 4px;
 
     background:
         linear-gradient(
@@ -1460,20 +958,16 @@ button {
     cursor: pointer;
 
     box-shadow:
-        0 10px 25px
-        rgba(7,26,47,.2);
+        0 10px 25px rgba(7,26,47,.2);
 
-    transition:
-        var(--transition);
+    transition: var(--transition);
 }
 
 .botao:hover,
 button:hover {
-    transform:
-        translateY(-4px);
+    transform: translateY(-4px);
 
-    color:
-        var(--navy);
+    color: var(--navy);
 
     background:
         linear-gradient(
@@ -1483,8 +977,39 @@ button:hover {
         );
 
     box-shadow:
-        0 15px 35px
-        rgba(201,162,39,.28);
+        0 15px 35px rgba(201,162,39,.28);
+}
+
+@keyframes circuloHero {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes flutuar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes carimboEntrada {
+    from {
+        opacity: 0;
+        transform: scale(1.5) rotate(-10deg);
+    }
+
+    to {
+        opacity: .75;
+        transform: scale(1) rotate(-5deg);
+    }
 }
 
 
@@ -1500,17 +1025,20 @@ button:hover {
         clamp(25px, 6vw, 75px);
 
     background:
-        white;
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f8fafc
+        );
 
-    border-radius:
-        var(--radius-lg);
+    border-radius: var(--radius-lg);
 
     border-top:
-        4px solid
-        var(--gold);
+        4px solid var(--gold);
 
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
 }
 
 #Sobre::before {
@@ -1521,20 +1049,250 @@ button:hover {
     top: 25px;
     right: 35px;
 
-    font-family:
-        Georgia,
-        serif;
+    color: rgba(201,162,39,.25);
+
+    font-family: Georgia, serif;
 
     font-size: 1rem;
 
-    letter-spacing: 4px;
+    font-weight: 900;
 
-    color:
-        rgba(201,162,39,.35);
+    letter-spacing: 5px;
+}
+
+#Sobre::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -50px;
+    bottom: -50px;
+
+    border: 1px solid rgba(201,162,39,.15);
+
+    border-radius: 50%;
+}
+
+.carimbo {
+    position: absolute;
+
+    top: 55px;
+    right: 70px;
+
+    padding: 7px 12px;
+
+    color: var(--red);
+
+    border: 2px solid var(--red);
+
+    font-family: monospace;
+
+    font-size: .6rem;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    transform: rotate(5deg);
+
+    opacity: .65;
+}
+
+.documento-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    padding: 10px;
+
+    border-top: 1px dashed #ccd5dc;
+    border-bottom: 1px dashed #ccd5dc;
+
+    color: #7d8c99;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 1px;
 }
 
 #Sobre p {
     text-align: justify;
+}
+
+.citacao-juridica {
+    position: relative;
+
+    margin: 40px 0;
+
+    padding: 30px 45px;
+
+    border-left: 4px solid var(--gold);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(201,162,39,.08),
+            transparent
+        );
+}
+
+.citacao-juridica .aspas {
+    position: absolute;
+
+    top: 0;
+    left: 15px;
+
+    color: var(--gold);
+
+    font-family: Georgia, serif;
+
+    font-size: 4rem;
+
+    opacity: .45;
+}
+
+.citacao-juridica p {
+    margin: 0 0 8px;
+
+    color: var(--navy);
+
+    font-family: Georgia, serif;
+
+    font-size: 1.15rem;
+
+    font-style: italic;
+
+    text-align: left !important;
+}
+
+.citacao-juridica small {
+    color: var(--muted);
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   PRINCÍPIOS
+========================================================= */
+
+#Principios {
+    text-align: center;
+}
+
+#Principios .secao-cabecalho {
+    justify-content: center;
+}
+
+.principios-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    text-align: left;
+}
+
+.principio-card {
+    position: relative;
+
+    min-height: 260px;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #dbe3e9;
+
+    background: white;
+
+    box-shadow: var(--shadow-sm);
+
+    transition: var(--transition);
+}
+
+.principio-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(201,162,39,.08),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    transition: var(--transition);
+}
+
+.principio-card:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--gold);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.principio-card:hover::before {
+    opacity: 1;
+}
+
+.principio-numero {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    color: #bdc8d0;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+}
+
+.principio-icone {
+    color: var(--gold);
+
+    font-size: 2.3rem;
+
+    margin-bottom: 15px;
+}
+
+.principio-card h3 {
+    position: relative;
+
+    margin: 0 0 10px;
+
+    font-size: 1.2rem;
+}
+
+.principio-card p {
+    position: relative;
+
+    color: var(--muted);
+
+    font-size: .9rem;
 }
 
 
@@ -1546,12 +1304,11 @@ button:hover {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(280px, 1fr)
-        );
+        repeat(auto-fit, minmax(280px, 1fr));
 
     gap: 22px;
+
+    margin-top: 30px;
 
     list-style: none;
 }
@@ -1561,36 +1318,67 @@ button:hover {
 
     padding: 30px;
 
-    background:
-        white;
+    overflow: hidden;
+
+    background: white;
 
     border:
-        1px solid
-        #e2e9ef;
+        1px solid #e2e9ef;
 
-    border-radius:
-        var(--radius);
+    border-radius: var(--radius);
 
-    box-shadow:
-        var(--shadow-sm);
+    box-shadow: var(--shadow-sm);
 
-    transition:
-        var(--transition);
+    transition: var(--transition);
 }
 
-#Habilidades li::before {
-    content: "§";
+#Habilidades li::after {
+    content: "";
 
-    display: block;
+    position: absolute;
 
-    margin-bottom: 10px;
+    right: -30px;
+    bottom: -30px;
 
-    color:
-        var(--gold);
+    width: 100px;
+    height: 100px;
 
-    font-family:
-        Georgia,
-        serif;
+    border:
+        1px solid rgba(201,162,39,.15);
+
+    border-radius: 50%;
+}
+
+#Habilidades li:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--gold);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.evidencia-tag {
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    padding: 4px 7px;
+
+    color: var(--red);
+
+    border: 1px solid rgba(159,37,37,.25);
+
+    font-family: monospace;
+
+    font-size: .5rem;
+
+    letter-spacing: 1px;
+}
+
+.habilidade-icone {
+    margin-bottom: 8px;
+
+    color: var(--gold);
 
     font-size: 2rem;
 }
@@ -1600,31 +1388,160 @@ button:hover {
 
     margin-bottom: 8px;
 
-    color:
-        var(--navy-2);
+    color: var(--navy-2);
 
-    font-family:
-        Georgia,
-        serif;
+    font-family: Georgia, serif;
 
     font-size: 1.15rem;
 }
 
-#Habilidades li:hover {
-    transform:
-        translateY(-8px);
+#Habilidades li p {
+    font-size: .92rem;
+}
 
-    border-color:
-        var(--gold);
+.perfil-investigador {
+    margin: 30px 0;
 
-    box-shadow:
-        var(--shadow-lg);
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--navy),
+            var(--navy-2)
+        );
+
+    border:
+        1px solid rgba(201,162,39,.3);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.perfil-investigador-topo {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+
+    color: rgba(255,255,255,.45);
+
+    font-family: monospace;
+
+    font-size: .6rem;
+
+    letter-spacing: 2px;
+}
+
+.perfil-investigador-topo strong {
+    color: var(--gold);
+}
+
+.nivel-competencia {
+    display: grid;
+
+    grid-template-columns: 150px 1fr 100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 10px 0;
+
+    color: rgba(255,255,255,.6);
+
+    font-family: monospace;
+
+    font-size: .6rem;
+}
+
+.nivel-competencia i {
+    position: relative;
+
+    height: 3px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,.1);
+}
+
+.nivel-competencia i::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold),
+            var(--gold-light)
+        );
+
+    transform-origin: left;
+
+    animation: nivel 2s ease both;
+}
+
+.nivel-competencia strong {
+    color: var(--gold);
+
+    text-align: right;
+}
+
+@keyframes nivel {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
 }
 
 
 /* =========================================================
-   PROJETOS
+   CASOS / PROJETOS
 ========================================================= */
+
+#Projetos {
+    position: relative;
+}
+
+.case-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+}
+
+.case-header h2 {
+    margin-bottom: 30px;
+}
+
+.case-carimbo {
+    padding: 8px 15px;
+
+    color: var(--red);
+
+    border: 2px solid var(--red);
+
+    font-family: monospace;
+
+    font-size: .65rem;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    transform: rotate(-4deg);
+
+    opacity: .7;
+}
 
 #Projetos article {
     position: relative;
@@ -1633,39 +1550,61 @@ button:hover {
         clamp(30px, 5vw, 60px);
 
     background:
-        white;
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f6f7f3
+        );
 
-    border-radius:
-        var(--radius-lg);
+    border-radius: var(--radius-lg);
 
     border:
-        1px solid
-        #e1e8ee;
+        1px solid #dce4e9;
 
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
 }
 
 #Projetos article::before {
-    content: "DIREITO";
+    content: "CASE FILE";
 
     position: absolute;
 
-    top: 25px;
-    right: 35px;
+    top: 30px;
+    right: -25px;
 
-    color:
-        rgba(7,26,47,.06);
+    color: rgba(7,26,47,.035);
 
-    font-family:
-        Georgia,
-        serif;
+    font-family: Georgia, serif;
 
-    font-size: 3rem;
+    font-size: 4rem;
 
     font-weight: 900;
 
-    letter-spacing: 3px;
+    transform: rotate(90deg);
+}
+
+.case-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    color: #7c8994;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 1px;
+}
+
+.case-meta span:first-child {
+    color: var(--gold);
+
+    font-weight: 900;
 }
 
 #Projetos h3 {
@@ -1694,6 +1633,186 @@ button:hover {
         );
 }
 
+.prova {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 5px;
+
+    padding: 8px 12px;
+
+    color: var(--navy);
+
+    border: 1px dashed #cbd5dc;
+
+    background: #f1f4f6;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 1px;
+}
+
+.prova span {
+    color: var(--red);
+}
+
+.divisor-caso {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 45px 0;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #c9d2d9 0,
+            #c9d2d9 6px,
+            transparent 6px,
+            transparent 12px
+        );
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+#LinhaDoTempo {
+    overflow: hidden;
+}
+
+.timeline {
+    position: relative;
+
+    margin-top: 30px;
+
+    padding-left: 60px;
+}
+
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 19px;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background:
+        linear-gradient(
+            var(--gold),
+            rgba(201,162,39,.1)
+        );
+}
+
+.timeline-item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+.timeline-data {
+    padding-top: 8px;
+
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: .6rem;
+
+    letter-spacing: 1px;
+
+    text-align: right;
+}
+
+.timeline-marcador {
+    position: absolute;
+
+    left: -60px;
+
+    top: 0;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--navy);
+
+    border: 3px solid var(--gold);
+
+    border-radius: 50%;
+
+    background: white;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    font-weight: 900;
+
+    z-index: 2;
+}
+
+.timeline-conteudo {
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e1e8ee;
+
+    box-shadow: var(--shadow-sm);
+
+    transition: var(--transition);
+}
+
+.timeline-conteudo:hover {
+    transform: translateX(8px);
+
+    border-color: var(--gold);
+
+    box-shadow: var(--shadow);
+}
+
+.timeline-conteudo > span {
+    color: #8996a1;
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
+}
+
+.timeline-conteudo h3 {
+    margin: 8px 0;
+
+}
+
+.timeline-conteudo p {
+    margin: 0;
+
+    font-size: .9rem;
+}
+
 
 /* =========================================================
    CURRÍCULO
@@ -1709,21 +1828,23 @@ button:hover {
     color: white;
 
     background:
+        radial-gradient(
+            circle at center,
+            rgba(201,162,39,.08),
+            transparent 45%
+        ),
         linear-gradient(
             135deg,
-            var(--navy),
-            var(--navy-2)
+            #030b14,
+            var(--navy)
         );
 
-    border-radius:
-        var(--radius-lg);
+    border-radius: var(--radius-lg);
 
     border:
-        1px solid
-        rgba(201,162,39,.4);
+        1px solid rgba(201,162,39,.4);
 
-    box-shadow:
-        var(--shadow-lg);
+    box-shadow: var(--shadow-lg);
 
     overflow: hidden;
 }
@@ -1736,14 +1857,51 @@ button:hover {
     right: 5%;
     top: -30px;
 
-    font-family:
-        Georgia,
-        serif;
+    color: rgba(201,162,39,.06);
+
+    font-family: Georgia, serif;
 
     font-size: 15rem;
+}
 
-    color:
-        rgba(201,162,39,.06);
+.documento-selo {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 6px 12px;
+
+    color: var(--gold);
+
+    border: 1px solid rgba(201,162,39,.4);
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
+}
+
+.curriculo-icone {
+    color: var(--gold);
+
+    font-size: 3rem;
+
+    line-height: 1;
+}
+
+.curriculo-codigo {
+    display: block;
+
+    margin: 10px 0;
+
+    color: rgba(255,255,255,.3);
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
 }
 
 #Curriculo h2 {
@@ -1753,33 +1911,47 @@ button:hover {
 }
 
 #Curriculo h2::after {
-    background:
-        var(--gold);
+    background: var(--gold);
 }
 
 #Curriculo p {
     position: relative;
 
-    color:
-        rgba(255,255,255,.75);
+    color: rgba(255,255,255,.65);
+}
+
+.curriculo-status {
+    position: relative;
+
+    margin: 15px 0 25px;
+
+    color: rgba(255,255,255,.4);
+
+    font-family: monospace;
+
+    font-size: .55rem;
+
+    letter-spacing: 2px;
+}
+
+.curriculo-status span {
+    color: #54d66d;
+
+    text-shadow: 0 0 8px #54d66d;
 }
 
 #Curriculo .botao {
     position: relative;
 
-    background:
-        var(--gold);
+    background: var(--gold);
 
-    color:
-        var(--navy);
+    color: var(--navy);
 
-    border-color:
-        var(--gold);
+    border-color: var(--gold);
 }
 
 #Curriculo .botao:hover {
-    background:
-        var(--gold-light);
+    background: var(--gold-light);
 }
 
 
@@ -1791,22 +1963,62 @@ button:hover {
     max-width: 900px;
 }
 
+.contato-alerta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+    padding: 15px 20px;
+
+    background:
+        rgba(201,162,39,.07);
+
+    border-left:
+        3px solid var(--gold);
+}
+
+.contato-alerta > span {
+    font-size: 1.6rem;
+}
+
+.contato-alerta strong {
+    color: var(--navy);
+
+    font-family: monospace;
+
+    font-size: .65rem;
+
+    letter-spacing: 2px;
+}
+
+.contato-alerta p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .82rem;
+}
+
 #Contato form {
     padding:
         clamp(25px, 5vw, 50px);
 
-    background:
-        white;
+    background: white;
 
-    border-radius:
-        var(--radius-lg);
+    border-radius: var(--radius-lg);
 
     border:
-        1px solid
-        #e1e8ee;
+        1px solid #e1e8ee;
 
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow);
+}
+
+.campo {
+    position: relative;
 }
 
 label {
@@ -1814,10 +2026,15 @@ label {
 
     margin-bottom: 8px;
 
-    color:
-        var(--navy);
+    color: var(--navy);
+
+    font-family: monospace;
+
+    font-size: .65rem;
 
     font-weight: 700;
+
+    letter-spacing: 1px;
 }
 
 input,
@@ -1829,44 +2046,36 @@ textarea {
     margin-bottom: 22px;
 
     border:
-        2px solid
-        #dce5ec;
+        2px solid #dce5ec;
 
-    border-radius: 8px;
+    border-radius: 5px;
 
-    background:
-        #f8fafc;
+    background: #f8fafc;
 
-    color:
-        var(--dark);
+    color: var(--dark);
 
     font-family: inherit;
 
     font-size: 1rem;
 
-    transition:
-        var(--transition);
+    transition: var(--transition);
 }
 
 input::placeholder,
 textarea::placeholder {
-    color:
-        #9aa8b5;
+    color: #9aa8b5;
 }
 
 input:focus,
 textarea:focus {
     outline: none;
 
-    border-color:
-        var(--gold);
+    border-color: var(--gold);
 
-    background:
-        white;
+    background: white;
 
     box-shadow:
-        0 0 0 4px
-        rgba(201,162,39,.10);
+        0 0 0 4px rgba(201,162,39,.10);
 }
 
 textarea {
@@ -1885,36 +2094,81 @@ form button {
 ========================================================= */
 
 footer {
+    position: relative;
+
     margin-top: 90px;
 
     padding: 45px 20px;
 
     text-align: center;
 
-    color:
-        rgba(255,255,255,.75);
+    color: rgba(255,255,255,.65);
 
     background:
         linear-gradient(
             135deg,
-            #050f1d,
+            #02070c,
             var(--navy)
         );
 
     border-top:
-        2px solid
-        rgba(201,162,39,.45);
+        2px solid rgba(201,162,39,.45);
+}
+
+.footer-simbolo {
+    margin-bottom: 10px;
+
+    color: var(--gold);
+
+    font-size: 2rem;
 }
 
 footer p {
     margin: 0;
 
-    font-size: .9rem;
+    font-size: .85rem;
+}
+
+footer span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: rgba(255,255,255,.25);
+
+    font-family: monospace;
+
+    font-size: .5rem;
+
+    letter-spacing: 3px;
 }
 
 
 /* =========================================================
    RESPONSIVO — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .principios-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .nav-status {
+        display: none;
+    }
+
+    .nivel-competencia {
+        grid-template-columns:
+            120px 1fr 80px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO — CELULAR
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -1923,58 +2177,9 @@ footer p {
         font-size: 16px;
     }
 
-
-    /* INTRO */
-
-    .intro-cena {
-        width: 94%;
-
-        padding: 28px 22px;
-    }
-
-    .intro-cabecalho {
-        font-size: .5rem;
-
-        letter-spacing: 2px;
-    }
-
-    .evidencias {
-        gap: 12px;
-    }
-
-    .evidencia {
-        width: 30%;
-
-        height: 115px;
-    }
-
-    .evidencia span {
-        font-size: 1.7rem;
-    }
-
-    .evidencia small {
-        font-size: .45rem;
-    }
-
-    .intro-titulo {
-        margin-top: 35px;
-    }
-
-    .intro-titulo h1 {
-        font-size: 3.3rem;
-    }
-
-    .investigacao {
-        gap: 10px;
-    }
-
-
-    /* HEADER */
-
     header,
     .cabecalho {
-        padding:
-            17px 4%;
+        padding: 17px 4%;
     }
 
     .perfil {
@@ -1991,7 +2196,7 @@ footer p {
     }
 
     .perfil-info p {
-        font-size: .78rem;
+        font-size: .72rem;
     }
 
     nav ul {
@@ -1999,23 +2204,16 @@ footer p {
     }
 
     nav a {
-        padding:
-            7px 9px;
+        padding: 7px 9px;
 
-        font-size: .82rem;
+        font-size: .76rem;
     }
-
-
-    /* SEÇÕES */
 
     section {
         width: 92%;
 
         padding: 65px 0;
     }
-
-
-    /* HERO */
 
     #hero {
         min-height: auto;
@@ -2026,179 +2224,72 @@ footer p {
     }
 
     #hero h1 {
-        font-size:
-            clamp(
-                2.7rem,
-                11vw,
-                4.5rem
-            );
+        font-size: clamp(2.7rem, 11vw, 4.5rem);
     }
 
-    #hero h1::before {
-        font-size: .65rem;
-
-        letter-spacing: 3px;
+    .hero-arquivo {
+        top: 20px;
     }
 
-
-    /* SOBRE */
+    .principios-grid {
+        grid-template-columns: 1fr;
+    }
 
     #Sobre p {
         text-align: left;
     }
 
+    .carimbo {
+        display: none;
+    }
 
-    /* HABILIDADES */
+    .timeline {
+        padding-left: 45px;
+    }
 
-    #Habilidades ul {
-        grid-template-columns: 1fr;
+    .timeline::before {
+        left: 14px;
+    }
+
+    .timeline-item {
+        display: block;
+
+        margin-bottom: 25px;
+    }
+
+    .timeline-data {
+        display: block;
+
+        margin-bottom: 8px;
+
+        text-align: left;
+    }
+
+    .timeline-marcador {
+        left: -45px;
+
+        width: 30px;
+        height: 30px;
+    }
+
+    .timeline-conteudo {
+        padding: 20px;
     }
 
 }
 
 
 /* =========================================================
-   RESPONSIVO — CELULAR
+   RESPONSIVO — CELULAR PEQUENO
 ========================================================= */
 
 @media (max-width: 480px) {
-
-    /* INTRO */
-
-    #intro {
-        align-items: center;
-    }
-
-    .intro-cena {
-        min-height: 520px;
-
-        padding:
-            22px 16px;
-    }
-
-    .intro-cabecalho {
-        flex-direction: column;
-
-        gap: 5px;
-
-        text-align: center;
-
-        font-size: .45rem;
-
-        letter-spacing: 1.5px;
-    }
-
-    .caso-identificacao {
-        flex-wrap: wrap;
-
-        gap: 10px;
-
-        justify-content: center;
-    }
-
-    .caso-identificacao strong {
-        font-size: 1.15rem;
-
-        letter-spacing: 3px;
-    }
-
-    .caso-label,
-    .caso-status {
-        font-size: .48rem;
-    }
-
-    .evidencias {
-        gap: 6px;
-
-        margin-top: 28px;
-    }
-
-    .evidencia {
-        width: 31%;
-
-        height: 90px;
-    }
-
-    .evidencia::before {
-        inset: 4px;
-    }
-
-    .evidencia span {
-        font-size: 1.2rem;
-    }
-
-    .evidencia small {
-        font-size: .35rem;
-
-        letter-spacing: 1px;
-    }
-
-    .intro-titulo {
-        margin-top: 30px;
-    }
-
-    .intro-subtitulo {
-        font-size: .48rem;
-
-        letter-spacing: 3px;
-    }
-
-    .intro-titulo h1 {
-        font-size: 2.5rem;
-
-        letter-spacing: -1px;
-    }
-
-    .intro-titulo p {
-        font-size: .42rem;
-
-        letter-spacing: 2px;
-    }
-
-    .investigacao {
-        grid-template-columns: 1fr;
-
-        gap: 7px;
-
-        margin-top: 25px;
-    }
-
-    .investigacao-item {
-        flex-direction: row;
-
-        justify-content: space-between;
-
-        border-bottom:
-            1px solid
-            rgba(255,255,255,.05);
-
-        padding-bottom: 4px;
-    }
-
-    .investigacao-item span,
-    .investigacao-item strong {
-        font-size: .42rem;
-    }
-
-    .intro-carregamento {
-        margin-top: 18px;
-    }
-
-    .intro-aviso {
-        font-size: .38rem;
-
-        letter-spacing: 2px;
-    }
-
-
-    /* HEADER */
 
     header,
     .cabecalho {
         position: relative;
 
-        padding:
-            20px 15px;
+        padding: 20px 15px;
     }
 
     .perfil {
@@ -2220,24 +2311,23 @@ footer p {
         font-size: 1.45rem;
     }
 
-    .perfil-info h1::after {
-        margin:
-            8px auto 0;
+    .perfil-info p {
+        font-size: .72rem;
     }
 
     nav ul {
-        gap: 3px;
+        gap: 2px;
     }
 
     nav a {
-        padding:
-            6px 8px;
+        padding: 6px 7px;
 
-        font-size: .75rem;
+        font-size: .68rem;
     }
 
-
-    /* HERO */
+    nav a span {
+        display: none;
+    }
 
     #hero {
         padding-top: 65px;
@@ -2249,25 +2339,25 @@ footer p {
         letter-spacing: -1px;
     }
 
-    #hero h1::before {
-        font-size: .55rem;
-
-        letter-spacing: 2px;
-    }
-
     #hero p {
-        font-size: .96rem;
+        font-size: .94rem;
     }
 
+    .hero-arquivo {
+        font-size: .43rem;
 
-    /* TÍTULOS */
+        letter-spacing: 1px;
+    }
+
+    .hero-overline {
+        font-size: .52rem;
+
+        letter-spacing: 3px;
+    }
 
     h2 {
         font-size: 2rem;
     }
-
-
-    /* CARDS */
 
     #Sobre,
     #Projetos article,
@@ -2277,13 +2367,15 @@ footer p {
     }
 
     #Sobre {
-        padding:
-            35px 22px;
+        padding: 35px 22px;
     }
 
     #Projetos article {
-        padding:
-            30px 20px;
+        padding: 30px 20px;
+    }
+
+    #Habilidades ul {
+        grid-template-columns: 1fr;
     }
 
     #Habilidades li {
@@ -2291,23 +2383,109 @@ footer p {
     }
 
     #Curriculo {
-        padding:
-            55px 22px;
+        padding: 55px 22px;
     }
-
-
-    /* BOTÕES */
 
     .botao,
     button {
         width: 100%;
     }
 
+    .intro-cena {
+        width: 94%;
+
+        padding: 20px;
+    }
+
+    .intro-cabecalho {
+        font-size: .45rem;
+    }
+
+    .caso-identificacao {
+        font-size: .5rem;
+    }
+
+    .intro-titulo {
+        padding: 35px 0 20px;
+    }
+
+    .intro-titulo h1 {
+        font-size: 3.4rem;
+
+        letter-spacing: -2px;
+    }
+
+    .intro-subtitulo {
+        font-size: .5rem;
+
+        letter-spacing: 3px;
+    }
+
+    .intro-titulo p {
+        font-size: .48rem;
+
+        letter-spacing: 3px;
+    }
+
+    .evidencias {
+        gap: 8px;
+    }
+
+    .evidencia {
+        width: 65px;
+        height: 65px;
+    }
+
+    .evidencia span {
+        font-size: 1.4rem;
+    }
+
+    .evidencia small {
+        font-size: .4rem;
+    }
+
+    .investigacao-item {
+        padding: 9px 3px;
+    }
+
+    .investigacao-item strong {
+        font-size: .48rem;
+    }
+
+    .nivel-competencia {
+        grid-template-columns:
+            90px 1fr 65px;
+
+        gap: 8px;
+
+        font-size: .48rem;
+    }
+
+    .case-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .case-carimbo {
+        margin-bottom: 20px;
+    }
+
+    .documento-meta {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .citacao-juridica {
+        padding: 25px 25px 25px 35px;
+    }
+
 }
 
 
 /* =========================================================
-   REDUÇÃO DE MOVIMENTO
+   ACESSIBILIDADE
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2316,11 +2494,8 @@ footer p {
     *::before,
     *::after {
         animation-duration: .01ms !important;
-
         animation-iteration-count: 1 !important;
-
         scroll-behavior: auto !important;
-
         transition-duration: .01ms !important;
     }
 
